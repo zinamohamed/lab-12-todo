@@ -10,12 +10,14 @@ async function run() {
     
     await client.query(`
             DROP TABLE IF EXISTS users CASCADE;
-            DROP TABLE IF EXISTS animals;
+            DROP TABLE IF EXISTS todos CASCADE;
         `);
 
+    // eslint-disable-next-line no-console
     console.log(' drop tables complete', getEmoji(), getEmoji(), getEmoji());
   }
-  catch(err) {
+  catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
   }
   finally {
