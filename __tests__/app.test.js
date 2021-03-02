@@ -31,31 +31,31 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('returns animals', async() => {
+    test('returns to do list', async() => {
 
       const expectation = [
         {
-          'id': 1,
-          'name': 'bessie',
-          'coolfactor': 3,
-          'owner_id': 1
+          id: 1,
+          task: 'do laundry',
+          done: false,
+          user_id: 1
         },
         {
-          'id': 2,
-          'name': 'jumpy',
-          'coolfactor': 4,
-          'owner_id': 1
+          id: 2,
+          task: 'wash dishes',
+          done: false,
+          user_id: 1
         },
         {
-          'id': 3,
-          'name': 'spot',
-          'coolfactor': 10,
-          'owner_id': 1
+          id: 3,
+          task: 'take out trash',
+          done: false,
+          user_id: 1
         }
       ];
 
       const data = await fakeRequest(app)
-        .get('/animals')
+        .get('/todos')
         .expect('Content-Type', /json/)
         .expect(200);
 
