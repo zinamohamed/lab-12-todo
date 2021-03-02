@@ -9,7 +9,7 @@ async function run() {
   try {
     // initiate connecting to db
     await client.connect();
-
+    
     // run a query to create tables
     await client.query(`
                 CREATE TABLE users (
@@ -19,12 +19,12 @@ async function run() {
                 );           
                 CREATE TABLE todos (
                     id SERIAL PRIMARY KEY NOT NULL,
-                    task VARCHAR(512) NOT NULL,
-                    done BOOLEAN NOT NULL,
-                    user_id INTEGER NOT NULL REFERENCES users(id)
+                    todo VARCHAR(512) NOT NULL,
+                    completed BOOLEAN NOT NULL,
+                    owner_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
-
+    
     // eslint-disable-next-line no-console
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());
   }
