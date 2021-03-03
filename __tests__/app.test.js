@@ -38,7 +38,7 @@ describe('app routes', () => {
 
     const dbTask = {
       ...task,
-      'owner_id': 2,
+      'user_id': 2,
       'id':4,
     };
 
@@ -81,30 +81,30 @@ describe('app routes', () => {
     });
 
     test('updates existing todo item', async() => {
- 
-
+      
       const newTask = {
-        'todo': 'make coffee',
-        'completed': false,
-        'id': 4,
-        'owner_id':2
+        todo: 'sweep floors',
+        completed:true,
       };
       
-      await fakeRequest(app)
-        .put('/api/todos/4')
+      
+      const updatedTask = {
+        'todo': 'sweep floors',
+        'completed': true,
+        'id': 1,
+        'user_id':2
+      };
+      
+    
+      const data = await fakeRequest(app)
+        .put('/api/todos/1')
+        .set('Authorization', token)
         .send(newTask)
-        .set('Authorization', token)
-        .expect('Content-Type', /json/)
-        .expect(200);
-
-      const updatedTask = await fakeRequest(app)
-        .get('/api/todos/4')
-        .set('Authorization', token)
         .expect('Content-Type', /json/)
         .expect(200);
 
 
-      expect(updatedTask.body[0]).toEqual(newTask);
+      expect(data.body).toEqual(updatedTask);
     });
   });
 });
