@@ -38,7 +38,7 @@ describe('app routes', () => {
 
     const dbTask = {
       ...task,
-      'user_id': 2,
+      'owner_id': 2,
       'id':4,
     };
 
@@ -58,7 +58,7 @@ describe('app routes', () => {
       expect(data.body[0]).toEqual(dbTask);
     });
 
-    test('returns todo item for a given user', async() => {
+    test('returns todo item for a givowner', async() => {
       const data = await fakeRequest(app)
         .get('/api/todos')
         .set('Authorization', token)
@@ -92,7 +92,7 @@ describe('app routes', () => {
         'todo': 'sweep floors',
         'completed': true,
         'id': 1,
-        'user_id':2
+        'owner_id':1
       };
       
     
@@ -104,7 +104,7 @@ describe('app routes', () => {
         .expect(200);
 
 
-      expect(data.body).toEqual(updatedTask);
+      expect(data.body[0]).toEqual(updatedTask);
     });
   });
 });
